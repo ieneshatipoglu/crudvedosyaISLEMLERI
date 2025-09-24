@@ -1,0 +1,31 @@
+﻿@model IEnumerable<crudvedosyaISLEMLERI.Models.Sarki>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Şarkının Id</th>
+            <th scope="col">Şarkının Adı</th>
+            <th scope="col">Şarkıcının Adı</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                
+                <td>@item.SarkiId</td>
+                <td>@item.SarkiAdi</td>
+                <td>@item.SarkicininAdi</td>
+            </tr>
+        }
+       </tbody>
+    </<table>
+ 
+
+
+
