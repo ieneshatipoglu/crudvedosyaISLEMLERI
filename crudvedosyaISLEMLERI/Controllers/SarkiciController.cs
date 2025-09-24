@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using crudvedosyaISLEMLERI.Models;
 using crudvedosyaISLEMLERI.Models.Baglanti;
+using crudvedosyaISLEMLERI.Models.BuKlasorrr;
 
 namespace crudvedosyaISLEMLERI.Controllers
 {
@@ -17,9 +18,15 @@ namespace crudvedosyaISLEMLERI.Controllers
 
         public IActionResult Index()
         {
-            var sarkilar = _context.Sarkilar.ToList();
-            ViewBag.Mesaj = TempData["Mesaj"];
-            return View(sarkilar);
+          
+            {
+                var vm = new Sinifsal
+                {
+                    Sarkilar = _context.Sarkilar.ToList(),
+                    Dosyalar = _context.Dosyalar.ToList()
+                };
+                return View(vm);
+            }
         }
 
         [HttpGet]
@@ -41,12 +48,12 @@ namespace crudvedosyaISLEMLERI.Controllers
             
             if (dosya != null && dosya.Length > 0)
             {
-                var izinliTurler = new string[] { ".jpg", ".png", ".pdf" };
+                var izinliTurler = new string[] {".jpg", ".png", ".pdf" };
                 var uzanti = Path.GetExtension(dosya.FileName)?.ToLower() ?? "";
 
                 if (!izinliTurler.Contains(uzanti))
                 {
-                    TempData["Mesaj"] = "⚠️ Sadece .jpg, .png, .pdf dosyaları yüklenebilir.";
+                    TempData["Mesaj"] = "Sadece .jpg, .png, .pdf dosyaları yüklenebilir.";
                     return RedirectToAction("Index");
                 }
 
