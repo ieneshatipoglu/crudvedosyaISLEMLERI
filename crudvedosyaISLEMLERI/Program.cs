@@ -1,7 +1,12 @@
+using crudvedosyaISLEMLERI.Models.Baglanti;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<DbBaglantisi>(options =>
+options.UseSqlServer("Server=DESKTOP-657V3F7\\SQLEXPRESS03;Database=CRUDOSYA;Trusted_Connection=True;TrustServerCertificate=True;"));
 
 var app = builder.Build();
 
