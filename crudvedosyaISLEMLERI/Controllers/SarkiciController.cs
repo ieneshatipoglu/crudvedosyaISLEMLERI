@@ -7,47 +7,102 @@ namespace crudvedosyaISLEMLERI.Controllers
     public class SarkiciController : Controller
     {
         private readonly DbBaglantisi _context;
-        public SarkiciController(DbBaglantisi context)
+        private readonly IWebHostEnvironment _env;
+
+        public SarkiciController(DbBaglantisi context, IWebHostEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         public IActionResult Index()
         {
-            var sarkilar=_context.Sarkilar.ToList();
+            var sarkilar = _context.Sarkilar.ToList();
+            ViewBag.Mesaj = TempData["Mesaj"];
             return View(sarkilar);
-            
         }
+
         [HttpGet]
         public IActionResult Create()
         {
             return View();
         }
+
         [HttpPost]
-        public IActionResult Create(Sarki sarkilar)
+        public IActionResult Create(Sarki sarki, IFormFile dosya)
         {
-            _context.Sarkilar.Add(sarkilar);
-            _context.SaveChanges();
+            if (!ModelState.IsValid)
+                return View(sarki);
+
+            
+            _context.Sarkilar.Add(sarki);
+            _context.SaveChanges(); 
+
+            
+            if (dosya != null && dosya.Length > 0)
+            {
+                var izinliTurler = new string[] { ".jpg", ".png", ".pdf" };
+                var uzanti = Path.GetExtension(dosya.FileName)?.ToLower() ?? "";
+
+                if (!izinliTurler.Contains(uzanti))
+                {
+                    TempData["Mesaj"] = "⚠️ Sadece .jpg, .png, .pdf dosyaları yüklenebilir.";
+                    return RedirectToAction("Index");
+                }
+
+                var uploads = Path.Combine(_env.WebRootPath, "Images");
+                if (!Directory.Exists(uploads))
+                    Directory.CreateDirectory(uploads);
+
+                var dosyaAdi = Guid.NewGuid().ToString() + uzanti;
+                var dosyaYolu = Path.Combine(uploads, dosyaAdi);
+
+                using (var stream = new FileStream(dosyaYolu, FileMode.Create))
+                {
+                    dosya.CopyTo(stream);
+                }
+
+                var kayit = new Dosya
+                {
+                    Ad = dosya.FileName,
+                    Boyut = dosya.Length,
+                    Tip = uzanti.StartsWith(".") ? uzanti.Substring(1) : uzanti
+                };
+
+                _context.Dosyalar.Add(kayit);
+                _context.SaveChanges();
+            }
+
+            TempData["Mesaj"] = "✅ Şarkı ve dosya başarıyla kaydedildi.";
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public IActionResult Update(int id)
         {
             var sarki = _context.Sarkilar.Find(id);
             return View(sarki);
         }
+
         [HttpPost]
-        public IActionResult Update(Sarki Sarkilar)
+        public IActionResult Update(Sarki sarki)
         {
-            var data = _context.Sarkilar.Update(Sarkilar);
+            if (!ModelState.IsValid)
+                return View(sarki);
+
+            _context.Sarkilar.Update(sarki);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+
         public IActionResult Delete(int id)
         {
             var sarki = _context.Sarkilar.Find(id);
-            _context.Sarkilar.Remove(sarki);
-            _context.SaveChanges();
+            if (sarki != null)
+            {
+                _context.Sarkilar.Remove(sarki);
+                _context.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
     }

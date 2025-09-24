@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
 <form asp-action="Create" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label asp-for="SarkiAdi">Şarkı Adı</label>
@@ -16,12 +15,10 @@
         <input asp-for="SarkicininAdi" class="form-control" placeholder="Şarkıcının Adını Giriniz" />
     </div>
 
-    <button type="submit" class="btn btn-danger mt-2">Ekleme Yap</button>
+    <div class="form-group">
+        <label>Şarkı Resmi / Dosya</label>
+        <input type="file" name="dosya" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success ">Ekle</button>
 </form>
-
-
-
-
-
-
-

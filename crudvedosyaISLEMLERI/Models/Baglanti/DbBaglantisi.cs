@@ -7,10 +7,12 @@ namespace crudvedosyaISLEMLERI.Models.Baglanti
     {
         public DbBaglantisi(DbContextOptions<DbBaglantisi>options)
             : base(options) { }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            
-        }
+          protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+         {
+
+         }
         public DbSet<Sarki>Sarkilar {  get; set; }
+        public DbSet<Dosya> Dosyalar { get; set; }
+
     }
 }
