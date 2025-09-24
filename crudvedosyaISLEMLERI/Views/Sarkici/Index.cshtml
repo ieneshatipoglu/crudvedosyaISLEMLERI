@@ -11,7 +11,10 @@
             <th scope="col">Şarkının Adı</th>
             <th scope="col">Şarkıcının Adı</th>
             
+            <a asp-action="Create" class="btn btn-dark mt-2">Ekle</a>
+
         </tr>
+        
     </thead>
     <tbody>
         @foreach(var item in Model)
@@ -21,8 +24,13 @@
                 <td>@item.SarkiId</td>
                 <td>@item.SarkiAdi</td>
                 <td>@item.SarkicininAdi</td>
+                <td>
+                    <a asp-action="Update" asp-route-id="@item.SarkiId" class="btn btn-primary mt-2">Güncelle</a>
+                    <a asp-action="Delete" asp-route-id="@item.SarkiId" class=" btn btn-danger mt-2">Sil</a>
+                </td>
             </tr>
         }
+       
        </tbody>
     </<table>
  

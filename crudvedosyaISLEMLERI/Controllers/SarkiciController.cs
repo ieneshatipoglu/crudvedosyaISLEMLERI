@@ -30,5 +30,25 @@ namespace crudvedosyaISLEMLERI.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            var sarki = _context.Sarkilar.Find(id);
+            return View(sarki);
+        }
+        [HttpPost]
+        public IActionResult Update(Sarki Sarkilar)
+        {
+            var data = _context.Sarkilar.Update(Sarkilar);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        public IActionResult Delete(int id)
+        {
+            var sarki = _context.Sarkilar.Find(id);
+            _context.Sarkilar.Remove(sarki);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

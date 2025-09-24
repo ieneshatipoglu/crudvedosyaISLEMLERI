@@ -1,0 +1,24 @@
+﻿@model crudvedosyaISLEMLERI.Models.Sarki
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form asp-action="Update" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="SarkiId">Şarkının Id</label>
+        <input asp-for="SarkiId" class="form-control" placeholder="Şarkı Id">
+    </div>
+    <div class="form-group">
+        <label asp-for="SarkiAdi">Şarkının Adı</label>
+        <input  asp-for="SarkiAdi" class="form-control"  placeholder="Şarkının Adı"> 
+    </div>
+    <div class="form-group">
+        <label asp-for="SarkicininAdi">Şarkıcının Adı</label>
+        <input  asp-for="SarkicininAdi" class="form-control"  placeholder="Şarkıcının Adı"> 
+    </div>
+
+    <button type="submit" class="btn btn-danger mt-4">Güncelleme Yap</button>
+</form>
+
+
