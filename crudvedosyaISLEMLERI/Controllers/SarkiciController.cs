@@ -18,5 +18,17 @@ namespace crudvedosyaISLEMLERI.Controllers
             return View(sarkilar);
             
         }
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Create(Sarki sarkilar)
+        {
+            _context.Sarkilar.Add(sarkilar);
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

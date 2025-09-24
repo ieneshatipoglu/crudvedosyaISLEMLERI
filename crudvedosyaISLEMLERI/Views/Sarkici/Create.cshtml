@@ -1,0 +1,27 @@
+﻿@model crudvedosyaISLEMLERI.Models.Sarki
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="SarkiAdi">Şarkı Adı</label>
+        <input asp-for="SarkiAdi" class="form-control" placeholder="Şarkı Adını Giriniz" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SarkicininAdi">Şarkıcının Adı</label>
+        <input asp-for="SarkicininAdi" class="form-control" placeholder="Şarkıcının Adını Giriniz" />
+    </div>
+
+    <button type="submit" class="btn btn-danger mt-2">Ekleme Yap</button>
+</form>
+
+
+
+
+
+
+
