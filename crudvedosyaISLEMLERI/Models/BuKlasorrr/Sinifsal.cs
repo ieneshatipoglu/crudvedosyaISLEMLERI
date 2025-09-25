@@ -5,5 +5,6 @@
         public List<Sarki> Sarkilar { get; set; }
         public List<Dosya> Dosyalar { get; set; }
     
+        
 }
 }

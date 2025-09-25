@@ -14,5 +14,6 @@ namespace crudvedosyaISLEMLERI.Models.Baglanti
         public DbSet<Sarki>Sarkilar {  get; set; }
         public DbSet<Dosya> Dosyalar { get; set; }
 
+        public DbSet<Login>Loginler { get; set; }
     }
 }

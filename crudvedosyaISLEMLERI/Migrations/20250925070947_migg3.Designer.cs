@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using crudvedosyaISLEMLERI.Models.Baglanti;
 
@@ -10,9 +11,11 @@ using crudvedosyaISLEMLERI.Models.Baglanti;
 namespace crudvedosyaISLEMLERI.Migrations
 {
     [DbContext(typeof(DbBaglantisi))]
-    partial class DbBaglantisiModelSnapshot : ModelSnapshot
+    [Migration("20250925070947_migg3")]
+    partial class migg3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
